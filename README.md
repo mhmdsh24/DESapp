@@ -56,7 +56,7 @@ Follow these steps to set up the project locally:
 │   ├── gui.py            # Graphical User Interface for the application
 │   └── __pycache__/      # Cached files
 ├── assets/
-│   └── code evaluation.py  # Scripts for code evaluation
+├── code evaluation.py  # Scripts for code evaluation
 ├── des_history.db        # Database for storing historical data
 ├── DES_Test_Cases.csv    # Example test cases for validation
 ├── requirements.txt      # Python dependencies
