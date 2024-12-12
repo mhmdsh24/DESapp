@@ -1,13 +1,14 @@
 # DES Application
 
-Welcome to the DES Application repository! This project is a powerful Data Extraction System designed to streamline data processing and extraction tasks for various applications. Below, you'll find details about the project, how to set it up, and how to contribute.
+Welcome to the DES Application repository! This project is an implementation of the DES (Data Encryption Standard) algorithm, designed to demonstrate detailed encryption and decryption processes. The software showcases the results of each DES round and key expansion step, making it an excellent educational tool for understanding how DES works.
 
 ## Features
 
-- **Data Processing**: Efficient extraction and processing of data.
-- **Customizable**: Easily extend functionality to suit specific use cases.
-- **User-Friendly**: Intuitive interfaces and clear documentation for ease of use.
-- **Robust Architecture**: Designed for scalability and reliability.
+- **64-bit Block Encryption**: Encrypts and decrypts 64-bit data blocks using a 64-bit key.
+- **Detailed Rounds Display**: Shows intermediate results after each DES round.
+- **Key Expansion Visualization**: Displays key generation and expansion for each round.
+- **Hexadecimal Input/Output**: Accepts message and key in hexadecimal format and displays results in hexadecimal.
+- **User-Friendly Interface**: Intuitive GUI for inputting data and viewing results.
 
 ## Prerequisites
 
@@ -43,21 +44,50 @@ Follow these steps to set up the project locally:
 
 ## Usage
 
-1. Configure the application settings as needed.
-2. Input your data through the GUI or predefined files.
-3. Run the application to extract and process the data.
-4. Review the results, which are saved or displayed as specified.
+### Inputs
+- **Message**: 16-character hexadecimal message or any text message that will be converted to 64-bit blocks.
+- **Key**: 16-character hexadecimal key used for encryption and decryption.
+
+### Outputs
+- **Encryption Process**: Displays results for each round, including:
+  - Key expansion for the round.
+  - Intermediate results after operations like permutation and substitution.
+  - Final ciphertext in hexadecimal.
+- **Decryption Process**: Mirrors the encryption process to recover the original message.
+
+## DES Algorithm Overview
+
+### Key Generation
+1. **Initial Permutation (PC-1)**: The 64-bit key is permuted and reduced to 56 bits.
+2. **Splitting**: The 56-bit key is divided into two 28-bit halves.
+3. **Round Shifts**: Each half undergoes left circular shifts according to a predefined schedule.
+4. **Compression (PC-2)**: The shifted halves are permuted and compressed to generate a 48-bit subkey for each round.
+
+### Encryption Steps
+1. **Initial Permutation**: The 64-bit plaintext undergoes an initial permutation.
+2. **Rounds (16 Total)**:
+   - **Expansion (E)**: Expands the 32-bit right half to 48 bits.
+   - **Key Mixing**: XORs the expanded data with the round subkey.
+   - **Substitution (S-Boxes)**: Substitutes the XORed result using predefined S-Boxes to reduce it to 32 bits.
+   - **Permutation (P)**: Permutes the substituted data.
+   - **XOR with Left Half**: The permuted result is XORed with the left half of the data.
+   - **Swap**: The left and right halves are swapped for the next round.
+3. **Final Permutation**: After the 16 rounds, the halves are recombined and permuted to produce the ciphertext.
+
+### Decryption Steps
+- The decryption process reverses the encryption steps using the same subkeys in reverse order.
 
 ## Folder Structure
 
 ```
 ├── app/
-│   ├── desv2.py          # Core logic for data extraction
-│   ├── gui.py            # Graphical User Interface for the application
+│   ├── desv2.py          # Core logic for DES encryption and decryption
+│   ├── gui.py            # Graphical User Interface for input/output
+│   ├── test.py           # Test scripts for the DES implementation
 │   └── __pycache__/      # Cached files
 ├── assets/
-├── code evaluation.py  # Scripts for code evaluation
-├── des_history.db        # Database for storing historical data
+├── code evaluation.py    # Scripts for evaluating code functionality
+├── des_history.db        # Database for storing encryption/decryption history
 ├── DES_Test_Cases.csv    # Example test cases for validation
 ├── requirements.txt      # Python dependencies
 └── README.md             # Project overview (this file)
