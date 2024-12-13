@@ -361,10 +361,8 @@ class DESApp:
             self.blocks_tab_view.grid_forget()
             # Get and validate inputs
             sentence = self.message_entrytxt.get()
-            if len(sentence)<16:
-                sentence = self.message_entrytxt.get().ljust(16,"0")
             key = self.key_entrytxt.get().ljust(16,'0')
-            if key=="0000000000000000"and sentence=="0000000000000000":
+            if key=="0000000000000000"and all(char == '0' for char in sentence):
                 error_label = customtkinter.CTkLabel(self.input_tabview.tab("Normal Text"), text="Key and message\ncannot be zero", text_color="red")
                 error_label.grid(row=0, column=2,padx=(0,35),pady=5,sticky='e')  # Show next to Key entry
             # Clear the error after 3 seconds
